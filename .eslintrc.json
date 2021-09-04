@@ -3,14 +3,18 @@
         "node": true,
         "es2021": true
     },
-    "extends": [
-        "airbnb-base",
-        "prettier"
-    ],
+    "extends": ["airbnb-base", "prettier"],
     "parserOptions": {
-        "ecmaVersion": 12,
-        "sourceType": "module"
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true,
+            "spread": true,
+            "restParams": true,
+            "experimentalObjectRestSpread": true
+        }
     },
     "rules": {
+      "arrow-body-style": "as-needed"
     }
 }
