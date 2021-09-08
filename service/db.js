@@ -4,17 +4,23 @@ const { Pool } = require('pg')
 const pool = new Pool()
 
 module.exports = {
-    getQuestions: async (productId) => {
-        const data = await pool.query(
-            `select up_questions_get(${productId}) as data`
-        )
-        return data
+    getQuestions: (productId) => {
+        return pool.query(`select up_questions_get(${productId}) as data`)
     },
 
-    getAnswers: async (questionId) => {
-        const data = await pool.query(
-            `select up_answers_get(${questionId}) as data`
+    getAnswers: (questionId) => {
+        return pool.query(`select up_answers_get(${questionId}) as data`)
+    },
+
+    postQuestion: (body, name, email, product_id) => {
+        return pool.query(
+            `select up_question_post('${body}', '${name}', '${email}', ${product_id})`
         )
-        return data
+    },
+
+    postAnswer: (question_id, body, name, email, photos) => {
+        return pool.query(
+            `select up_answer_post(${question_id}, '${body}', '${name}', '${email}', array[${photos.map(p => "'" + p + "'")}])`
+        )
     },
 }

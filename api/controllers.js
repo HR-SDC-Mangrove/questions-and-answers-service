@@ -3,7 +3,7 @@ const { filter, forEach } = require('lodash')
 const helpers = require('./helpers')
 
 module.exports = {
-    getQuestions: async (req, res) => {
+    getQuestions: (req, res) => {
         let { product_id, page, count } = req.query
 
         page = page || 1
@@ -13,14 +13,14 @@ module.exports = {
             .then((q) => {
                 const { data } = q.rows[0]
 
-                res.send(helpers.formatQuestions(data, product_id))
+                res.status(200).send(helpers.formatQuestions(data, product_id))
             })
             .catch((err) => {
                 res.status(400).send(err)
             })
     },
 
-    getAnswers: async (req, res) => {
+    getAnswers: (req, res) => {
         let { page, count } = req.query
         const { question_id } = req.params
 
@@ -31,10 +31,59 @@ module.exports = {
             .then((a) => {
                 const { data } = a.rows[0]
 
-                res.send(helpers.formatAnswers(data, question_id, page, count))
+                res.status(200).send(helpers.formatAnswers(data, question_id, page, count))
             })
             .catch((err) => {
                 res.status(400).send(err)
             })
     },
+
+    postQuestion: (req, res) => {
+      let { body, name, email, product_id } = req.body;
+
+      db.postQuestion(body, name, email, product_id)
+      .then(() => {
+        res.sendStatus(201)
+      })
+      .catch(err => {
+        res.status(400).send(err);
+      });
+    },
+
+    postAnswer: (req, res) => {
+      let { question_id } = req.params;
+      let { body, name, email, photos } = req.body;
+
+      db.postAnswer(question_id, body, name, email, photos)
+      .then(() => {
+        res.sendStatus(201)
+      })
+      .catch(err => {
+        res.status(400).send(err);
+      });
+    },
+
+    markQuestionHelpful: (req, res) => {
+      let { question_id } = req.params;
+
+      res.sendStatus(204);
+    },
+
+    reportQuestion: (req, res) => {
+      let { question_id } = req.params;
+
+      res.sendStatus(204);
+    },
+
+    markAnswerHelpful: (req, res) => {
+      let { question_id } = req.params;
+
+      res.sendStatus(204);
+    },
+
+    reportAnswer: (req, res) => {
+      let { question_id } = req.params;
+
+      res.sendStatus(204);
+    }
 }

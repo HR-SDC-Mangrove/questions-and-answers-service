@@ -2,7 +2,9 @@ module.exports = {
     // Formats questions to be consumed by the API
     formatQuestions(questions, product_id) {
         questions.forEach((q) => {
-            q.answers = !q.answers ? [] : q.answers.reduce((acc, cur) => {
+            q.answers = !q.answers
+                ? []
+                : q.answers.reduce((acc, cur) => {
                       cur.photos = cur.photos || []
 
                       cur.photos.forEach((p) => {
@@ -26,7 +28,9 @@ module.exports = {
     // Formats answers to be consumed by the API
     formatAnswers(answers, question_id, page, count) {
         answers.forEach((a) => {
-            a.photos = !a.photos ? [] : a.photos.map((p) => {
+            a.photos = !a.photos
+                ? []
+                : a.photos.map((p) => {
                       return {
                           id: p.id,
                           url: p.url,
