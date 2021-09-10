@@ -20,7 +20,25 @@ module.exports = {
 
     postAnswer: (question_id, body, name, email, photos) => {
         return pool.query(
-            `select up_answer_post(${question_id}, '${body}', '${name}', '${email}', array[${photos.map(p => "'" + p + "'")}])`
+            `select up_answer_post(${question_id}, '${body}', '${name}', '${email}', array[${photos.map(
+                (p) => "'" + p + "'"
+            )}])`
         )
+    },
+
+    markQuestionHelpful: (question_id) => {
+        return pool.query(`select up_question_mark_helpful(${question_id})`)
+    },
+
+    reportQuestion: (question_id) => {
+        return pool.query(`select up_question_report(${question_id})`)
+    },
+
+    markAnswerHelpful: (answer_id) => {
+        return pool.query(`select up_answer_mark_helpful(${answer_id})`)
+    },
+
+    reportAnswer: (answer_id) => {
+        return pool.query(`select up_answer_report(${answer_id})`)
     },
 }

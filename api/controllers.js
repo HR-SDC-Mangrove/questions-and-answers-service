@@ -66,24 +66,48 @@ module.exports = {
     markQuestionHelpful: (req, res) => {
       let { question_id } = req.params;
 
-      res.sendStatus(204);
+      db.markQuestionHelpful(question_id)
+      .then(() => {
+        res.sendStatus(204)
+      })
+      .catch(err => {
+        res.status(400).send(err);
+      });
     },
 
     reportQuestion: (req, res) => {
       let { question_id } = req.params;
 
-      res.sendStatus(204);
+      db.reportQuestion(question_id)
+      .then(() => {
+        res.sendStatus(204)
+      })
+      .catch(err => {
+        res.status(400).send(err);
+      });
     },
 
     markAnswerHelpful: (req, res) => {
-      let { question_id } = req.params;
+      let { answer_id } = req.params;
 
-      res.sendStatus(204);
+      db.markAnswerHelpful(answer_id)
+      .then(() => {
+        res.sendStatus(204)
+      })
+      .catch(err => {
+        res.status(400).send(err);
+      });
     },
 
     reportAnswer: (req, res) => {
-      let { question_id } = req.params;
+      let { answer_id } = req.params;
 
-      res.sendStatus(204);
+      db.reportAnswer(answer_id)
+      .then(() => {
+        res.sendStatus(204)
+      })
+      .catch(err => {
+        res.status(400).send(err);
+      });
     }
 }
