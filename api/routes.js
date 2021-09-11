@@ -13,4 +13,7 @@ router.put('/questions/:question_id/report', controllers.reportQuestion);
 router.put('/answers/:answer_id/helpful', controllers.markAnswerHelpful);
 router.put('/answers/:answer_id/report', controllers.reportAnswer);
 
+// Clean DB of test data
+router.post('/cleandb', controllers.cleanDB);
+
 module.exports = router;

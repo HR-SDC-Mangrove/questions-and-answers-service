@@ -41,4 +41,8 @@ module.exports = {
     reportAnswer: (answer_id) => {
         return pool.query(`select up_answer_report(${answer_id})`)
     },
+
+    cleanDB: () => {
+      return pool.query('select clean_db()');
+    }
 }

@@ -8,6 +8,13 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Req logger
+// app.use((req, res, next) => {
+//   console.log('BODY', req.body);
+//   console.log('PARAMS', req.query);
+//   next();
+// })
+
 app.use('/qa', routes);
 
 app.listen(process.env.PORT, () => {
