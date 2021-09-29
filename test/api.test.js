@@ -2,16 +2,16 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const expect = chai.expect
 const baseUrl = 'localhost:8888'
-const controllers = require('../api/controllers');
-const helpers = require('../api/helpers');
-const _mockData = require('../test/_mockData');
+const controllers = require('../api/controllers')
+const helpers = require('../api/helpers')
+const _mockData = require('../test/_mockData')
 
 chai.use(chaiHttp)
 
 describe('API endpoints', function () {
     it('Gets questions for a product', function (done) {
         chai.request(baseUrl)
-            .get('/qa/questions?product_id=5')
+            .get('/qa/questions?product_id=1000004')
             .end((err, res) => {
                 expect(res).to.have.status(200)
                 expect(res.body.results.length).to.be.gt(0)
@@ -29,7 +29,7 @@ describe('API endpoints', function () {
 
     it('Gets answers for a question', function (done) {
         chai.request(baseUrl)
-            .get('/qa/questions/1/answers')
+            .get('/qa/questions/1000004/answers')
             .end((err, res) => {
                 expect(res).to.have.status(200)
                 expect(res.body.results.length).to.be.gt(0)
@@ -172,11 +172,15 @@ describe('API endpoints', function () {
             })
 
         controllers.cleanDB()
-    });
+    })
 
     it('Formats the data correctly', function (done) {
-      expect(helpers.formatQuestions(_mockData.input.questions, 5)).to.deep.equal(_mockData.output.questions);
-      expect(helpers.formatAnswers(_mockData.input.answers, 1, 1, 5)).to.deep.equal(_mockData.output.answers);
-      done();
+        expect(
+            helpers.formatQuestions(_mockData.input.questions, 5)
+        ).to.deep.equal(_mockData.output.questions)
+        expect(
+            helpers.formatAnswers(_mockData.input.answers, 1, 1, 5)
+        ).to.deep.equal(_mockData.output.answers)
+        done()
     })
 })

@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "dev": "nodemon server.js",
-        "test": "nyc mocha"
+        "test:coverage": "nyc mocha --all",
+        "test": "mocha test/api.test.js",
+        "start": "node server.js"
     },
     "repository": {
         "type": "git",
