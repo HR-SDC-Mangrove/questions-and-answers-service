@@ -109,5 +109,15 @@ module.exports = {
       .catch(err => {
         res.status(400).send(err);
       });
+    },
+
+    cleanDB: (req, res) => {
+      db.cleanDB()
+      .then(() => {
+        res.sendStatus(200)
+      })
+      .catch(err => {
+        res.status(400).send(err);
+      });
     }
 }
