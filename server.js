@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 app.use('/qa', routes);
 
-app.get('/loaderio-82e1afa4c08267caa569c0851a3b132f', (req, res) => {
+app.get('/loaderio-cf17fce0926e12430f4ddd8aac49d1f4', (req, res) => {
   res.sendFile(path.resolve('./loader.io.txt'));
 });
 
